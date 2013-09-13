@@ -86,5 +86,37 @@ describe Tennis::Player do
         expect(player.score).to eq('forty')
     end
   end
+
+  describe 'advantage' do
+    context 'when one player is up by 1 point and both players have more than 3 points,' do
+      it 'one player will have advantage' do
+        player1.points >= 3
+        player2.points >= 3
+
+        expect(player1.score).to eq('advantage')
+        expect(player2.score).to eq('advantage')
+      end
+    end
+  end
+
+  describe 'deuce' do
+    context 'when both players have 40' do
+      it 'the game is in deuce' do
+        player1.points = 3 && player2.points == 3
+
+        expect('').to eq('deuce')
+      end
+    end
+  end
+
+  describe 'win' do
+    context 'if they one player has advantage and scores' do
+      it 'will win the game' do
+
+        expect('').to eq('')
+      end
+    end
+  end
+
 end
 end

@@ -11,8 +11,7 @@ module Tennis
     end
 
     def opponent
-      @player1 = @player2
-      @player2 = @player1
+      @opponent
     end
 
 
@@ -29,7 +28,7 @@ module Tennis
   end
 
   class Player
-    attr_accessor :points, :opponent
+    attr_accessor :points, :opponent, :deuce, :advantage, :win
 
     def initialize
       @points = 0
@@ -50,5 +49,10 @@ module Tennis
       return 'thirty' if @points == 2
       return 'forty' if @points == 3
     end
+
+    def advantage
+      player.points > opponent.points && @points > 3
+    end
+
   end
 end
