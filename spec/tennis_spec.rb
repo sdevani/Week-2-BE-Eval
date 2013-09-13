@@ -4,6 +4,7 @@ require 'rspec'
 require_relative '../tennis'
 
 describe Tennis::Game do
+
   let(:game) { Tennis::Game.new }
 
   describe '.initialize' do
@@ -49,6 +50,8 @@ describe Tennis::Player do
   describe '#score' do
     context 'when points is 0' do
       it 'returns love' do
+        player.points = 0
+
         expect(player.score).to eq('love')
       end
     end
@@ -62,11 +65,19 @@ describe Tennis::Player do
     end
     
     context 'when points is 2' do
-      it 'returns thirty'  
-    end
-    
-    context 'when points is 3' do
-      it 'returns forty' 
+      it 'returns thirty' do
+        player.points = 2
+
+        expect(player.score).to eq('thirty')
     end
   end
+    
+    context 'when points is 3' do
+      it 'returns forty' do
+        player.points = 3
+
+        expect(player.score).to eq('forty')
+    end
+  end
+end
 end
