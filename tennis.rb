@@ -10,6 +10,12 @@ module Tennis
       @player2.opponent = @player1
     end
 
+    def opponent
+      @player1 = @player2
+      @player2 = @player1
+    end
+
+
     # Records a win for a ball in a game.
     #
     # winner - The Integer (1 or 2) representing the winning player.
@@ -18,6 +24,7 @@ module Tennis
     def wins_ball(winner)
       # TODO: Think it's gross to pass an integer instead of a player object?
       # Then reimplement this method!
+      player1.record_won_ball!
     end
   end
 
@@ -36,6 +43,7 @@ module Tennis
     end
 
     # Returns the String score for the player.
+    # Each score has been added depending on the amount of points
     def score
       return 'love' if @points == 0
       return 'fifteen' if @points == 1
