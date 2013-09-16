@@ -10,10 +10,6 @@ module Tennis
       @player2.opponent = @player1
     end
 
-    def opponent
-      @opponent
-    end
-
 
     # Records a win for a ball in a game.
     #
@@ -23,8 +19,19 @@ module Tennis
     def wins_ball(winner)
       # TODO: Think it's gross to pass an integer instead of a player object?
       # Then reimplement this method!
-      player1.record_won_ball!
-    end
+      if player == 1
+        @player1.record_won_ball!
+      else
+        @player2.record_won_ball!
+      end
+
+      def wins_game(player)
+        if player == 1
+          @player1.record_won_ball!
+        else
+          @player1.record_won_ball!
+        end
+      end
   end
 
   class Player
@@ -32,6 +39,10 @@ module Tennis
 
     def initialize
       @points = 0
+    end
+
+    def opponent
+      @opponent
     end
 
     # Increments the score by 1.
@@ -48,11 +59,17 @@ module Tennis
       return 'fifteen' if @points == 1
       return 'thirty' if @points == 2
       return 'forty' if @points == 3
+      return 'deuce' if @points >= 3 && @points = opponent.points
+      return 'advantage' if @points >= 3 && @pointes - 1 == opponent.points
     end
 
-    def advantage
-      player.points > opponent.points && @points > 3
+
+    def game_won?
+      if @points >= 4 && @points - 2 > opponent.points
+        record_won_game
+      end
     end
+
 
   end
 end

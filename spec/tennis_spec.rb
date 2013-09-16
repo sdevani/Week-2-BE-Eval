@@ -30,6 +30,14 @@ describe Tennis::Game do
       expect(game.player1.points).to eq(1)
     end
   end
+
+  describe '@wins_game' do
+    it "increases the game won count by 1 for the winning player" do
+      game.wins_game(1)
+
+      expect(player1.games_won).to eq(1)
+    end
+  end
 end
 
 describe Tennis::Player do
@@ -51,6 +59,14 @@ describe Tennis::Player do
       player.record_won_ball!
 
       expect(player.points).to eq(1)
+    end
+  end
+
+  describe '#record_won_game!' do
+    it "increases the game won" do
+      player.record_won_game!
+
+      expect(player.games_won).to eq(1)
     end
   end
 
@@ -87,36 +103,32 @@ describe Tennis::Player do
     end
   end
 
-  describe 'advantage' do
-    context 'when one player is up by 1 point and both players have more than 3 points,' do
-      it 'one player will have advantage' do
-        player1.points >= 3
-        player2.points >= 3
+      context "when both players have greater than or equal to 3 points and score is tied" do
+        it 'returns deuce' do
+          player.points = 3
+          player.opponent.points = 3
 
-        expect(player1.score).to eq('advantage')
-        expect(player2.score).to eq('advantage')
+          expect(player.score).to eq('deuce')
+        end
+      end
+
+      context 'when both players have greater than or equal to 3 points and one player has one more point' do
+        it 'returns advantage' do
+          player.points = 4
+          player.opponent.points = 3
+
+          expect(player.score).to eq('advantage')
+        end
       end
     end
-  end
 
-  describe 'deuce' do
-    context 'when both players have 40' do
-      it 'the game is in deuce' do
-        player1.points = 3 && player2.points == 3
-
-        expect('').to eq('deuce')
-      end
-    end
-  end
-
-  describe 'win' do
+  describe '#won_game?' do
     context 'if they one player has advantage and scores' do
       it 'will win the game' do
+        player.points = 4
+        player.opponent.points = 2
 
-        expect('').to eq('')
+        expect(player.games_won).to eq(1)
       end
     end
-  end
-
-end
-end
+  
