@@ -12,6 +12,7 @@ describe Tennis::Game do
       expect(game.player1).to be_a(Tennis::Player)
       expect(game.player2).to be_a(Tennis::Player)
     end
+  end
 
     it 'sets the opponent for each player' do
       player1 = game.player1
@@ -47,6 +48,7 @@ describe Tennis::Player do
 
     return player
   end
+end
 
   describe '.initialize' do
     it 'sets the points to 0' do
@@ -103,24 +105,24 @@ describe Tennis::Player do
     end
   end
 
-      context "when both players have greater than or equal to 3 points and score is tied" do
-        it 'returns deuce' do
-          player.points = 3
-          player.opponent.points = 3
+    context "when both players have greater than or equal to 3 points and score is tied" do
+      it 'returns deuce' do
+        player.points = 3
+        player.opponent.points = 3
 
-          expect(player.score).to eq('deuce')
-        end
-      end
-
-      context 'when both players have greater than or equal to 3 points and one player has one more point' do
-        it 'returns advantage' do
-          player.points = 4
-          player.opponent.points = 3
-
-          expect(player.score).to eq('advantage')
-        end
+        expect(player.score).to eq('deuce')
       end
     end
+
+    context 'when both players have greater than or equal to 3 points and one player has one more point' do
+      it 'returns advantage' do
+        player.points = 4
+        player.opponent.points = 3
+
+        expect(player.score).to eq('advantage')
+      end
+    end
+  end
 
   describe '#won_game?' do
     context 'if they one player has advantage and scores' do
@@ -131,4 +133,4 @@ describe Tennis::Player do
         expect(player.games_won).to eq(1)
       end
     end
-  
+end  

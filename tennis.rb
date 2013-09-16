@@ -54,6 +54,7 @@ module Tennis
 
     # Returns the String score for the player.
     # Each score has been added depending on the amount of points
+    # Returns score depending on the amount of points scored
     def score
       return 'love' if @points == 0
       return 'fifteen' if @points == 1
@@ -63,7 +64,7 @@ module Tennis
       return 'advantage' if @points >= 3 && @pointes - 1 == opponent.points
     end
 
-
+    #Records game won if one player has greater than or equal to 4 points and the other player has 2 less points
     def game_won?
       if @points >= 4 && @points - 2 > opponent.points
         record_won_game
@@ -72,4 +73,3 @@ module Tennis
 
 
   end
-end
